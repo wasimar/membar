@@ -1,5 +1,5 @@
 """
-This code will print a progress bar to the console that shows the current memory usage and the peak memory usage. The progress bar will update every time the `update()` method is called.
+This code will print a usage bar to the console that shows the current memory usage and the peak memory usage. The usage bar will update every time the `update()` method is called.
 """
 from os import getpid
 from psutil import Process, virtual_memory
@@ -18,15 +18,15 @@ def bar_string(current: int, total: int, indicator: str = '■', length: int = 3
     indicator: indicator character
     length: length of the indicator bar
     """
-    progress = current / total
-    n = int(progress * length)
-    if progress < .5:
+    usage = current / total
+    n = int(usage * length)
+    if usage < .5:
         Col = OKGREEN
-    elif progress < .8:
+    elif usage < .8:
         Col = WARNING
     else:
         Col = DANGER
-    return f"{Col}{indicator * n}{' ' * (length - n)} {progress * 100:.2f}% | {current}/{total}GB{ENDC}"
+    return f"{Col}{indicator * n}{' ' * (length - n)} {usage * 100:.2f}% | {current}/{total}GB{ENDC}"
 
 
 class MemBar:
@@ -37,17 +37,17 @@ class MemBar:
         """
         self.total = total
         self.current = 0
-        self.progress = Process(getpid())
+        self.process = Process(getpid())
         self.peak_ram = 0
         self.total_ram = total_ram
-        self.init_ram = (self.progress.memory_info().rss / 10**9).__round__(3)
+        self.init_ram = (self.process.memory_info().rss / 10**9).__round__(3)
 
     def update(self) -> None:
         """
         Update the memory monitor bar.
         """
         self.current += 1
-        rss = (self.progress.memory_info().rss / 10**9).__round__(3)
+        rss = (self.process.memory_info().rss / 10**9).__round__(3)
         self.peak_ram = max(self.peak_ram, rss)
         print('\033[K' + f"[Peak] {bar_string(self.peak_ram, self.total_ram)} [Current] {bar_string(rss, self.total_ram)}", end='\r', flush=True)        
         if self.current == self.total:
