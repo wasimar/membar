@@ -4,7 +4,7 @@ A usage bar to the console that shows the current memory usage and the peak memo
 **Note:**  Mesuring the memory usage is not always accurate. The memory usage is measured using the `psutil` package. For more information, see [this](https://psutil.readthedocs.io/en/latest/#psutil.Process.memory_info) page.
 
 ## Known Issue
-- The total available memory is not accurate for [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) users. Use the `total_ram` parameter to set the total available memory manually.
+- The total available memory reported by `psutil` for [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) users is not same as actual system memory due to virtualization. Use the `total_ram` parameter to set the total available memory manually.
 
 ## Installation
 ```bash
