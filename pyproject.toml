@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "membar"
+version = "0.1.0"
+description = "A progress bar to the console that shows the current memory usage and the peak memory usage."
+authors = ["wasimar"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+numpy = "^1.25.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
