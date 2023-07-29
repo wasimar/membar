@@ -27,3 +27,8 @@ for i in sizes:
 Here, the `total` parameter is the total number of iterations and `total_ram` is the total amount of memory permitted in GB (default: total system memory). The `update` method updates the bar and shows the current memory usage and the peak memory usage. The output will be something like this:
 
 ![demo](doc/demo-gif.gif)
+
+The bars are colored based on the memory usage. The colors are: 
+- Green: less than 50% of the total memory
+- Yellow: between 50% and 80% of the total memory
+- Red: more than 80% of the total memory
